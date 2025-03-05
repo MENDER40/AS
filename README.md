@@ -109,16 +109,11 @@ local args = {
     [2] = "World",
     [3] = "Click"
 }
-
 game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Bridge"):FireServer(unpack(args))
 wait(0)
            end
 end)
-      
-      
-      --TELEPORT
-
-Info:AddButton({
+Teleport:AddButton({
     Title = "Lobby",
     Callback = function()
 --Clover
@@ -128,14 +123,11 @@ local args = {
     [3] = "Teleport",
     [4] = "Lobby"
 }
-
 game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Bridge"):FireServer(unpack(args))
 
 print("Teleportado para Lobby")
     end
 })
-
-
 Teleport:AddButton({
     Title = "Piece Village",
     Callback = function()
@@ -145,14 +137,11 @@ local args = {
     [3] = "Teleport",
     [4] = "Piece Village"
 }
-
 game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Bridge"):FireServer(unpack(args))
 print("Teleportado para Piece Village")
     end
 })
-
-
-local AutoClick= Tabs.Farm:AddToggle("Village", {Title = "Piece Village|Mult", Default = false})
+local AutoClick= Tabs.Eggs:AddToggle("Village", {Title = "Piece Village|Mult", Default = false})
 AutoClick:OnChanged(function()
     while AutoClick.Value do
 --remote
@@ -165,7 +154,6 @@ local args = {
 }
 
 game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Bridge"):FireServer(unpack(args))
-
         wait(0)
     end
 end)
