@@ -141,7 +141,7 @@ game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Bridg
 print("Teleportado para Piece Village")
     end
 })
-local AutoClick= Tabs.Eggs:AddToggle("Village", {Title = "Piece Village|Mult", Default = false})
+local AutoClick= Tabs.Eggs:AddToggle("Demon Town", {Title = "Demon town", Default = false})
 AutoClick:OnChanged(function()
     while AutoClick.Value do
 --remote
@@ -153,7 +153,6 @@ local args = {
     [5] = "Yen"
 }
 
-game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Bridge"):FireServer(unpack(args))
         wait(0)
     end
 end)
