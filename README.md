@@ -99,7 +99,7 @@ Tabs.Info:AddParagraph({
     })
 
 --FARM
-local AutoClick= Tabs.Farm:AddToggle("Auto energy", {Title = "Auto energy", Default = false})
+local AutoClick= Tabs.Farm:AddToggle("Auto Click", {Title = "Auto energy", Default = false})
 AutoClick:OnChanged(function()
     while AutoClick.Value do
     --remote
