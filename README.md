@@ -118,7 +118,7 @@ end)
       
       --TELEPORT
 
-Teleport:AddButton({
+Info:AddButton({
     Title = "Lobby",
     Callback = function()
 --Clover
@@ -151,11 +151,8 @@ print("Teleportado para Piece Village")
     end
 })
 
---TELEPOT
 
-
---EGGS
-local AutoClick= Tabs.Eggs:AddToggle("Village", {Title = "Piece Village|Mult", Default = false})
+local AutoClick= Tabs.Farm:AddToggle("Village", {Title = "Piece Village|Mult", Default = false})
 AutoClick:OnChanged(function()
     while AutoClick.Value do
 --remote
