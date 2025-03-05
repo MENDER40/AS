@@ -90,7 +90,7 @@ local Tabs = {
     Teleport= Window:AddTab({ Title = "Teleports", Icon = "sword" }),
     Eggs= Window:AddTab({ Title = "Hath", Icon = "egg" }),
     Main= Window:AddTab({ Title = "Main", Icon = "rbxassetid://18831424669" }),
-    Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
+    Settings = Window:AddTab({ Title = "Settings", Icon = "settings" }),
 }
 
 Tabs.Info:AddParagraph({
@@ -114,7 +114,6 @@ game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Bridg
 wait(0)
            end
 end)
-      --FARM
       
       
       --TELEPORT
@@ -137,7 +136,7 @@ print("Teleportado para Lobby")
 })
 
 
-TeleportTab:AddButton({
+Teleport:AddButton({
     Title = "Piece Village",
     Callback = function()
 local args = {
