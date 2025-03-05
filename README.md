@@ -98,8 +98,8 @@ Tabs.Info:AddParagraph({
         Content = "Bug Fixeds \nAdd Magnect Drops \nAdd Teleport \nAdd rank Up"
     })
 
---FARM
-local AutoClick= Tabs.Farm:AddToggle("Auto Click", {Title = "Auto energy", Default = false})
+
+local AutoClick= Tabs.Farm:AddToggle("Auto Click", {Title = "Auto click", Default = false})
 AutoClick:OnChanged(function()
     while AutoClick.Value do
     --remote
