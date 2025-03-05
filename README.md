@@ -85,9 +85,18 @@ local Window = Fluent:CreateWindow({
     MinimizeKey = Enum.KeyCode.LeftControl
 })
 local Tabs = {
-    Farm = Window:AddTab({ Title = " Farm", Icon = "sword" }),
+    Info= Window:AddTab({ Title = "Info", Icon = "scroll" }),
+    Farm= Window:AddTab({ Title = " Farm", Icon = "sword" }),
+    Teleport= Window:AddTab({ Title = "Teleports", Icon = "sword" }),
+    Eggs= Window:AddTab({ Title = "Hath", Icon = "egg" }),
+    Main= Window:AddTab({ Title = "Main", Icon = "rbxassetid://18831424669" }),
+    Settings = Window:AddTab({ Title = "Settings", Icon = "settings" })
 }
 
+Tabs.Info:AddParagraph({
+        Title = "Esse script esta em update",
+        Content = "Bug Fixeds \nAdd Magnect Drops \nAdd Teleport \nAdd rank Up"
+    })
 
 --FARM
 local AutoClick= Tabs.Farm:AddToggle("Auto energy", {Title = "Auto energy", Default = false})
@@ -109,10 +118,8 @@ end)
       
       
       --TELEPORT
-local Tabs = {
-    TeleportTab= Window:AddTab({ Title = "| Hath", Icon = "Eggs" })
-}
-TeleportTab:AddButton({
+
+Teleport:AddButton({
     Title = "Lobby",
     Callback = function()
 --Clover
@@ -147,9 +154,7 @@ print("Teleportado para Piece Village")
 
 --TELEPOT
 
-local Tabs = {
-    Eggs= Window:AddTab({ Title = "| Hath", Icon = "rbxassetid://18831424669" })
-}
+
 --EGGS
 local AutoClick= Tabs.Eggs:AddToggle("Village", {Title = "Piece Village|Mult", Default = false})
 AutoClick:OnChanged(function()
