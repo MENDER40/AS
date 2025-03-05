@@ -3,21 +3,21 @@ local ScreenGui = Instance.new("ScreenGui")
 local ImageButton = Instance.new("ImageButton")
 local UICorner = Instance.new("UICorner")
 
--- Propriedades
+-- Propriedades da GUI
 ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+ScreenGui.Enabled = true -- Garante que a GUI está ativada
 
 ImageButton.Parent = ScreenGui
 ImageButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-ImageButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
 ImageButton.BorderSizePixel = 0
 ImageButton.Position = UDim2.new(0.005, 0, 0.010, 0)
-ImageButton.Size = UDim2.new(0, 45, 0, 45)
-ImageButton.Image = "rbxassetid://139166819013498" -- Id da icon aqui
+ImageButton.Size = UDim2.new(0, 50, 0, 50) -- Tamanho aumentado para facilitar a visualização
+ImageButton.Image = "rbxassetid://139166819013498" -- ID do ícone
 
 UICorner.Parent = ImageButton
 
--- FunÃ§Ã£o para tornar o botÃ£o arrastÃ¡vel
+-- Função para tornar o botão arrastável
 local UIS = game:GetService("UserInputService")
 local dragging, dragInput, startPos, startMousePos
 local hasMoved = false
@@ -57,22 +57,31 @@ UIS.InputChanged:Connect(function(input)
 end)
 
 ImageButton.MouseButton1Down:Connect(function()
-    task.wait(0.1) -- Isso serve pro icone nao abrir quando a pessoa for arrastar ele, mexe aqui nÃ£o
+    task.wait(0.1)
     if not hasMoved then
         game:GetService("VirtualInputManager"):SendKeyEvent(true, Enum.KeyCode.LeftControl, false, game)
     end
 end)
 
+-- Carregar Fluent Library
 local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
 local SaveManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/SaveManager.lua"))()
 local InterfaceManager = loadstring(game:HttpGet("https://raw.githubusercontent.com/dawid-scripts/Fluent/master/Addons/InterfaceManager.lua"))()
+
+if not Fluent then
+    warn("Erro ao carregar Fluent Library")
+    return
+end
+
 local MarketplaceService = game:GetService("MarketplaceService")
 local PlaceId = game.PlaceId
 local ProductInfo = MarketplaceService:GetProductInfo(PlaceId)
 local GameName = ProductInfo.Name
 
-Fluent:Notify({ Title = "Script executado com sucesso", Content = "Você esta usando Mender_hub",
-Duration= 4 
+Fluent:Notify({ 
+    Title = "Script executado com sucesso", 
+    Content = "Você está usando Mender_hub",
+    Duration = 4 
 })
 
 local Window = Fluent:CreateWindow({
@@ -84,75 +93,75 @@ local Window = Fluent:CreateWindow({
     Theme = "Amethyst",
     MinimizeKey = Enum.KeyCode.LeftControl
 })
+
 local Tabs = {
-    Info= Window:AddTab({ Title = "Info", Icon = "scroll" }),
-    Farm= Window:AddTab({ Title = " Farm", Icon = "sword" }),
-    Teleport= Window:AddTab({ Title = "Teleports", Icon = "sword" }),
-    Eggs= Window:AddTab({ Title = "Hath", Icon = "egg" }),
-    Main= Window:AddTab({ Title = "Main", Icon = "rbxassetid://18831424669" }),
+    Info = Window:AddTab({ Title = "Info", Icon = "scroll" }),
+    Farm = Window:AddTab({ Title = "Farm", Icon = "rbxassetid://18831424669" }),
+    Teleport = Window:AddTab({ Title = "Teleports", Icon = "rbxassetid://18831424669" }),
+    Eggs = Window:AddTab({ Title = "Hatch", Icon = "egg" }),
     Settings = Window:AddTab({ Title = "Settings", Icon = "settings" }),
 }
 
 Tabs.Info:AddParagraph({
-        Title = "Esse script esta em update",
-        Content = "Bug Fixeds \nAdd Magnect Drops \nAdd Teleport \nAdd rank Up"
-    })
+    Title = "Esse script está em atualização",
+    Content = "Correções de bugs\nAdicionado Magnet Drops\nAdicionado Teleporte\nAdicionado Rank Up"
+})
 
-
-local AutoClick= Tabs.Farm:AddToggle("Auto Click", {Title = "Auto click", Default = false})
-AutoClick:OnChanged(function()
-    while AutoClick.Value do
-    --remote
-    
-local args = {
-    [1] = "Enemies",
-    [2] = "World",
-    [3] = "Click"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Bridge"):FireServer(unpack(args))
-wait(0)
-           end
+-- Auto Click (Farm)
+local AutoClickFarm = Tabs.Farm:AddToggle("AutoClickFarm", {Title = "Auto Click", Default = false})
+AutoClickFarm:OnChanged(function()
+    while AutoClickFarm.Value do
+        local args = {
+            [1] = "Enemies",
+            [2] = "World",
+            [3] = "Click"
+        }
+        game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Bridge"):FireServer(unpack(args))
+        task.wait(0.1)
+    end
 end)
-Teleport:AddButton({
+
+-- Teleporte
+Tabs.Teleport:AddButton({
     Title = "Lobby",
     Callback = function()
---Clover
-local args = {
-    [1] = "General",
-    [2] = "Maps",
-    [3] = "Teleport",
-    [4] = "Lobby"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Bridge"):FireServer(unpack(args))
-
-print("Teleportado para Lobby")
+        local args = {
+            [1] = "General",
+            [2] = "Maps",
+            [3] = "Teleport",
+            [4] = "Lobby"
+        }
+        game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Bridge"):FireServer(unpack(args))
+        print("Teleportado para Lobby")
     end
 })
-Teleport:AddButton({
+
+Tabs.Teleport:AddButton({
     Title = "Piece Village",
     Callback = function()
-local args = {
-    [1] = "General",
-    [2] = "Maps",
-    [3] = "Teleport",
-    [4] = "Piece Village"
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Bridge"):FireServer(unpack(args))
-print("Teleportado para Piece Village")
+        local args = {
+            [1] = "General",
+            [2] = "Maps",
+            [3] = "Teleport",
+            [4] = "Piece Village"
+        }
+        game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Bridge"):FireServer(unpack(args))
+        print("Teleportado para Piece Village")
     end
 })
-local AutoClick= Tabs.Eggs:AddToggle("Demon Town", {Title = "Demon town", Default = false})
-AutoClick:OnChanged(function()
-    while AutoClick.Value do
---remote
-local args = {
-    [1] = "General",
-    [2] = "Eggs",
-    [3] = "Multi",
-    [4] = "Piece Village",
-    [5] = "Yen"
-}
 
-        wait(0)
+-- Auto Hatch (Eggs)
+local AutoHatch = Tabs.Eggs:AddToggle("AutoHatch", {Title = "Demon Town", Default = false})
+AutoHatch:OnChanged(function()
+    while AutoHatch.Value do
+        local args = {
+            [1] = "General",
+            [2] = "Eggs",
+            [3] = "Multi",
+            [4] = "Piece Village",
+            [5] = "Yen"
+        }
+        game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("Bridge"):FireServer(unpack(args))
+        task.wait(0.1)
     end
 end)
