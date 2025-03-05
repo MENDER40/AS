@@ -151,7 +151,7 @@ Tabs.Teleport:AddButton({
 })
 
 -- Auto Hatch (Eggs)
-local AutoHatch = Tabs.Eggs:AddToggle("AutoHatch", {Title = "Demon Town", Default = false})
+local AutoHatch = Tabs.Eggs:AddToggle("AutoHatch", {Title = "Piece village", Default = false})
 AutoHatch:OnChanged(function()
     while AutoHatch.Value do
         local args = {
